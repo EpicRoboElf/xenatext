@@ -44,8 +44,12 @@ onValue(noteRef,(snapshot)=>{
 });
 
 
-editor.addEventListener("input",()=>{
-
-    set(noteRef,editor.value);
-
+editor.addEventListener("input", async () => {
+    try {
+        await set(noteRef, editor.value);
+        status.textContent = "Сохранено ✔";
+    } catch (e) {
+        console.error(e);
+        status.textContent = "Ошибка сохранения ❌";
+    }
 });
